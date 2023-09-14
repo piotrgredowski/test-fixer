@@ -1,0 +1,22 @@
+[project]
+name = "test-fixer"
+version = "0.1.0"
+description = "Add your description here"
+authors = [{ name = "Piotr Grędowski", email = "piotrgredowski@gmail.com" }]
+dependencies = ["openai>=0.28.0"]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = ["pytest>=7.4.2", "black>=23.9.1", "ruff>=0.0.289"]
+
+[tool.rye.scripts]
+test-examples = { cmd = "python -m pytest examples" }
+
+[tool.hatch.metadata]
+allow-direct-references = true
