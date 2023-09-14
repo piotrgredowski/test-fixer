@@ -6,6 +6,9 @@ authors = [{ name = "Piotr Grędowski", email = "piotrgredowski@gmail.com" }]
 dependencies = [
     "openai>=0.28.0",
     "python-dotenv>=1.0.0",
+    "typer>=0.9.0",
+    "pydantic>=2.3.0",
+    "gitignore_parser>=0.1.6",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

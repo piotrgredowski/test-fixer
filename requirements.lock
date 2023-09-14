@@ -9,16 +9,23 @@
 -e file:.
 aiohttp==3.8.5
 aiosignal==1.3.1
+annotated-types==0.5.0
 async-timeout==4.0.3
 attrs==23.1.0
 certifi==2023.7.22
 charset-normalizer==3.2.0
+click==8.1.7
 frozenlist==1.4.0
+gitignore-parser==0.1.6
 idna==3.4
 multidict==6.0.4
 openai==0.28.0
+pydantic==2.3.0
+pydantic-core==2.6.3
 python-dotenv==1.0.0
 requests==2.31.0
 tqdm==4.66.1
+typer==0.9.0
+typing-extensions==4.7.1
 urllib3==2.0.4
 yarl==1.9.2
