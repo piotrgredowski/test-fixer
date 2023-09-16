@@ -1,4 +1,3 @@
-Don't hallucinate.
 Be very precise.
 Your main job is to make tests pass.
 Be sure to not break anything else.
@@ -48,14 +47,25 @@ And you should return suggestions of how code should be modified to make tests p
 Output need to follow below format:
 ```json
 {
-    "type": "fix",
-    "content": "patch",
+    "type": "...",
+    "patch": "...",
 }
 ```
 Type of response can be:
 - fix
-In `object["content"]` there will be GIT patch with all changes needed to be applied to fix failing test.
-I should be able to apply this patch and all tests will be passing then.
+In `object["patch"]` there will be difference between old file and new version - allowing to run fixed tests.
+This difference needs to be applicable GIT patch.
+Example of how GIT patch looks like:
+```
+diff --git a/sssrc/m.py b/sssrc/m.py
+--- a/sssrc/m.py
++++ b/sssrc/m.py
+@@ -1,4 +1,4 @@
+ def func(*args: list[int]):
+     fff = sum(args)
+-    a = 1
++    b = 1
+```
 
 First of all you should look for fixes in codebase - so all files except of test files.
 If you don't find such fix - then propose a fix in test file.

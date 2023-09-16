@@ -6,9 +6,11 @@ authors = [{ name = "Piotr Grędowski", email = "piotrgredowski@gmail.com" }]
 dependencies = [
     "openai>=0.28.0",
     "python-dotenv>=1.0.0",
-    "typer>=0.9.0",
+    "typer[all]>=0.9.0",
     "pydantic>=2.3.0",
     "gitignore_parser>=0.1.6",
+    "result>=0.13.1",
+    "loguru>=0.7.2",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
@@ -19,10 +21,22 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = ["pytest>=7.4.2", "black>=23.9.1", "ruff>=0.0.289"]
+dev-dependencies = [
+    "pytest>=7.4.2",
+    "black>=23.9.1",
+    "ruff>=0.0.289",
+    "pytest-mock>=3.11.1",
+    "ipython>=8.12.2",
+]
 
 [tool.rye.scripts]
 test-examples = { cmd = "python -m pytest examples" }
 
 [tool.hatch.metadata]
 allow-direct-references = true
+
+[tool.pytest.ini_options]
+markers = [
+    "functional: mark test as functional",
+    "example: mark test as example",
+]

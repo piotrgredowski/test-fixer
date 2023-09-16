@@ -9,13 +9,37 @@
       "type": "python",
       "request": "launch",
       "module": "test_fixer",
+      "args": [
+        "--directory",
+        "_just_for_now/examples",
+        "--tests-output-file",
+        "_just_for_now/examples_tests_output.txt"
+      ],
+      "env": {
+        "DEBUG": "1"
+      },
       "justMyCode": true
     },
     {
-      "name": "Run all tests",
+      "name": "Run functional tests",
       "type": "python",
       "request": "launch",
       "module": "pytest",
+      "args": ["tests", "-m", "functional"],
+      "env": {
+        "DEBUG": "1"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Run example tests",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["tests", "-m", "example"],
+      "env": {
+        "DEBUG": "1"
+      },
       "justMyCode": true
     }
   ]
