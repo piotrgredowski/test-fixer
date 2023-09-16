@@ -3,6 +3,7 @@ import pytest
 from examples.src.sum import sum_printer
 
 
+@pytest.mark.example
 @pytest.mark.parametrize(
     "args, expected",
     [
