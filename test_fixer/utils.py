@@ -18,22 +18,27 @@ def save_fix_in_file(filename: str, fix: str, overwrite: bool = False):
 
 
 def apply_patch(patch: str, directory: pathlib.Path):
-    with tempfile.NamedTemporaryFile() as temp_file:
-        temp_file.name = f"{temp_file.name}.patch"
-        save_fix_in_file(temp_file.name, patch, overwrite=True)
+    with tempfile.NamedTemporaryFile(
+        dir=directory.parent, suffix=".patch", delete=False
+    ) as temp_file:
+        # save_fix_in_file(temp_file.name, patch, overwrite=True)
 
-        cmd = (
-            f"cd {directory.parent};"
-            f"git apply {temp_file.name} --directory={directory.name} -v"
-        )
-        result = subprocess.run(
-            cmd,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        print(result)
-        pass
+        temp_file.write(patch.encode())
+
+    cmd = (
+        # f"cd {directory.parent}; "
+        # f"git apply {temp_file.name} -v"
+        f"git apply {temp_file.name} -v --directory={directory.name}"
+    ).strip()
+    result = subprocess.run(
+        cmd,
+        shell=True,
+        cwd=directory.parent,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    print(result)
+    pass
 
 
 def is_debug_mode_enabled():

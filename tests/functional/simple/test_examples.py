@@ -18,14 +18,19 @@ def _run_tests(directory: pathlib.Path):
     import subprocess
 
     cmd = f"python -m pytest {directory.name!s}"
-    result = subprocess.run(
-        cmd.split(" "),
-        cwd=directory.parent,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+    try:
+        result = subprocess.run(
+            cmd.split(" "),
+            cwd=directory.parent,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+            shell=True,
+        )
 
-    return result.returncode
+        return result.returncode
+    except subprocess.CalledProcessError as e:
+        return e.returncode
 
 
 @pytest.fixture
@@ -69,7 +74,7 @@ def test_simple(temp_dir: pathlib.Path, mock_chat):
     assert tests_result == pytest.ExitCode.TESTS_FAILED
 
     tests_output_file = pathlib.Path(__file__).parent / "examples_tests_output.txt"
-    fix_tests(directory=dest_dir, tests_output_file=tests_output_file)
+    fix_tests(directory=str(dest_dir), tests_output_file=str(tests_output_file))
 
     tests_result = _run_tests(dest_dir)
 
